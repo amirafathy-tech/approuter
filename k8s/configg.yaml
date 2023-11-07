@@ -6,11 +6,6 @@ data:
   destinations: >-
     [
         {
-          "name": "httpbin",
-          "url": "http://httpbin.dev.svc.cluster.local:8000",
-          "forwardAuthToken": true
-        },
-        {
           "name": "frontend",
           "url": "https://app7.c-24084ae.kyma.ondemand.com",
           "forwardAuthToken": true
@@ -23,27 +18,13 @@ data:
     {
         "authenticationMethod": "route",
         "sessionTimeout": 10,
-        "login" : {
-          "callbackEndpoint": "/sap/com/httpbin"
-        },
         "routes": [
-            {
-                "source": "^/sap/com/httpbin/(.*)$",
-                "destination": "httpbin",
-                "target": "$1",
-                "authenticationType": "xsuaa"
-            },
-            {
-            "source": "^/(.*)$",
-            "destination": "httpbin",
-            "target": "$1",
-            "authenticationType": "xsuaa"
-        },
          {
-      "source": "^/my-frontend-app/(.*)$",
-      "target": "https://app7.c-24084ae.kyma.ondemand.com/$1",
-      "authenticationType": "xsuaa"
-      }
+            "source": "^/(.*)$",
+            "destination": "frontend",
+            "target": "https://app7.c-24084ae.kyma.ondemand.com/$1",
+            "authenticationType": "xsuaa"
+         }
         
         ]
     }
